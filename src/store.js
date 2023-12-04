@@ -15,7 +15,9 @@ export const store = reactive({
                             title: response.data.results[i].title,
                             original_title: response.data.results[i].original_title,
                             original_language: response.data.results[i].original_language,
-                            vote_average: response.data.results[i].vote_average
+                            vote_average: response.data.results[i].vote_average,
+                            srcCopertina: "https://image.tmdb.org/t/p/w342" + response.data.results[i].poster_path,
+                            numberStar: Math.ceil(response.data.results[i].vote_average * 5 / 10)
                         })
                     }
                 })
@@ -29,7 +31,9 @@ export const store = reactive({
                             title: response.data.results[i].name,
                             original_title: response.data.results[i].original_name,
                             original_language: response.data.results[i].original_language,
-                            vote_average: response.data.results[i].vote_average
+                            vote_average: response.data.results[i].vote_average,
+                            srcCopertina: "https://image.tmdb.org/t/p/w342" + response.data.results[i].poster_path,
+                            numberStar: Math.ceil(response.data.results[i].vote_average * 5 / 10)
                         })
                     }
                 })
