@@ -56,7 +56,7 @@ export default {
 
 <style scoped>
 .card {
-    aspect-ratio: 0.666;
+    aspect-ratio: 1;
     width: calc((100% - 3rem) / 3);
     background-color: rgba(27, 27, 27, 255);
     color: white;
@@ -66,6 +66,7 @@ export default {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: top;
     display: block;
 }
 
