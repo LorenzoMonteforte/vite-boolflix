@@ -5,3 +5,19 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
+
+.fonSiz0_9rem {
+  font-size: 0.9rem;
+}
+
+.marTop0_5rem {
+  margin-top: 0.5rem;
+}
+
+.texAliCen {
+  text-align: center;
+}
+
+.verAliMid {
+  vertical-align: middle;
+}
