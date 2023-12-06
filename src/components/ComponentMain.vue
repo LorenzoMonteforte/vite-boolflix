@@ -24,11 +24,19 @@ export default {
                 :original_title="film.original_title" :overview="film.overview" :numberStar="film.numberStar"
                 :original_language="film.original_language" />
         </div>
+        <div class="btnContainer">
+            <button @click="store.methods.downloadAPIfilms(false)" v-if="store.showMoreFilm == true">Mostra altri
+                contenuti</button>
+        </div>
         <h2 v-if="store.foundTVseries.length != 0">SERIE TV</h2>
         <div class="cardContainer">
             <ComponentCard v-for="TVserie in this.store.foundTVseries" :srcCopertina="TVserie.srcCopertina"
                 :title="TVserie.title" :original_title="TVserie.original_title" :overview="TVserie.overview"
                 :numberStar="TVserie.numberStar" :original_language="TVserie.original_language" />
+        </div>
+        <div class="btnContainer">
+            <button @click="store.methods.downloadAPITVseries(false)" v-if="store.showMoreTVseries == true">Mostra altri
+                contenuti</button>
         </div>
     </main>
 </template>
@@ -61,5 +69,18 @@ h2 {
 
 h2:last-of-type {
     margin-top: 1.5rem;
+}
+
+.btnContainer {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.btnContainer>button {
+    padding: 0.5rem;
+    border: none;
+    color: white;
+    background-color: rgba(27, 27, 27, 255);
 }
 </style>
