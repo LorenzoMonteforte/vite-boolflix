@@ -22,7 +22,7 @@ export default {
         <div class="cardContainer">
             <ComponentCard v-for="film in this.store.foundFilms" :srcCopertina="film.srcCopertina" :title="film.title"
                 :original_title="film.original_title" :overview="film.overview" :numberStar="film.numberStar"
-                :original_language="film.original_language" />
+                :original_language="film.original_language" :actors="film.actors" :genresName="film.genresName" />
         </div>
         <div class="btnContainer">
             <button @click="store.methods.downloadAPIfilms(false)" v-if="store.showMoreFilm == true">Mostra altri
@@ -32,7 +32,8 @@ export default {
         <div class="cardContainer">
             <ComponentCard v-for="TVserie in this.store.foundTVseries" :srcCopertina="TVserie.srcCopertina"
                 :title="TVserie.title" :original_title="TVserie.original_title" :overview="TVserie.overview"
-                :numberStar="TVserie.numberStar" :original_language="TVserie.original_language" />
+                :numberStar="TVserie.numberStar" :original_language="TVserie.original_language" :actors="TVserie.actors"
+                :genresName="TVserie.genresName" />
         </div>
         <div class="btnContainer">
             <button @click="store.methods.downloadAPITVseries(false)" v-if="store.showMoreTVseries == true">Mostra altri

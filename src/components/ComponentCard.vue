@@ -7,7 +7,9 @@ export default {
         original_title: String,
         overview: String,
         numberStar: Number,
-        original_language: String
+        original_language: String,
+        actors: Array,
+        genresName: Array
     }
 }
 </script>
@@ -23,6 +25,13 @@ export default {
             <div class="marTop0_5rem">
                 <strong>Titolo originale: </strong>
                 <span class="fonSiz0_9rem">{{ original_title }}</span>
+            </div>
+            <div class="marTop0_5rem">
+                <strong v-if="genresName.length != 0">Genere: </strong>
+                <span class="fonSiz0_9rem" v-for="(gener, i) in genresName">
+                    <span v-if="i < (genresName.length - 1)">{{ gener }}, </span>
+                    <span v-else>{{ gener }}.</span>
+                </span>
             </div>
             <div class="marTop0_5rem">
                 <strong>Panoramica: </strong>
@@ -49,6 +58,13 @@ export default {
                 <img class="bandiera" src="../assets/img_bandiere/es.png" alt="Bandiera spagnola"
                     v-else-if="original_language == 'es'">
                 <span v-else>{{ original_language }}</span>
+            </div>
+            <div class="marTop0_5rem">
+                <strong v-if="actors.length != 0">Attori: </strong>
+                <span class="fonSiz0_9rem" v-for="(actor, i) in actors">
+                    <span :class="i == 0 ? 'fonWeiBol' : ''" v-if="i < (actors.length - 1)">{{ actor.name }}, </span>
+                    <span v-else>{{ actor.name }}.</span>
+                </span>
             </div>
         </div>
     </div>
@@ -96,5 +112,9 @@ export default {
 
 .colYel {
     color: yellow;
+}
+
+.fonWeiBol {
+    font-weight: bold;
 }
 </style>
