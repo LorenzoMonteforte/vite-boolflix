@@ -24,20 +24,22 @@ export default {
                 :original_title="film.original_title" :overview="film.overview" :numberStar="film.numberStar"
                 :original_language="film.original_language" :actors="film.actors" :genresName="film.genresName" />
         </div>
-        <div class="btnContainer">
-            <button @click="store.methods.downloadAPIfilms(false)" v-if="store.showMoreFilm == true">Mostra altri
-                contenuti</button>
+        <div class="btnContainer" v-if="store.showMoreFilm == true">
+            <button @click="store.methods.downloadAPIfilms(false, store.whichFilmURL)">
+                Mostra altri contenuti
+            </button>
         </div>
-        <h2 v-if="store.foundTVseries.length != 0">SERIE TV</h2>
+        <h2 :class="store.foundFilms.length != 0 ? 'marTop1_5rem' : ''" v-if="store.foundTVseries.length != 0">SERIE TV</h2>
         <div class="cardContainer">
             <ComponentCard v-for="TVserie in this.store.foundTVseries" :srcCopertina="TVserie.srcCopertina"
                 :title="TVserie.title" :original_title="TVserie.original_title" :overview="TVserie.overview"
                 :numberStar="TVserie.numberStar" :original_language="TVserie.original_language" :actors="TVserie.actors"
                 :genresName="TVserie.genresName" />
         </div>
-        <div class="btnContainer">
-            <button @click="store.methods.downloadAPITVseries(false)" v-if="store.showMoreTVseries == true">Mostra altri
-                contenuti</button>
+        <div class="btnContainer" v-if="store.showMoreTVseries == true">
+            <button @click="store.methods.downloadAPITVseries(false, store.whichTVserieURL)">
+                Mostra altri contenuti
+            </button>
         </div>
     </main>
 </template>
@@ -47,7 +49,7 @@ main {
     background-color: rgba(77, 77, 77, 255);
     padding: 0 3rem;
     padding-top: calc(1.5rem + 100px);
-    padding-bottom: 3rem;
+    padding-bottom: 1.5rem;
     min-height: 100vh;
 }
 
@@ -66,10 +68,6 @@ h2 {
     text-align: center;
     color: white;
     margin-bottom: 1.5rem;
-}
-
-h2:last-of-type {
-    margin-top: 1.5rem;
 }
 
 .btnContainer {

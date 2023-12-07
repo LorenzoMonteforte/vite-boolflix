@@ -2,15 +2,19 @@ import { reactive } from "vue";
 import axios, { isCancel, AxiosError } from 'axios';
 export const store = reactive({
     search: "",
+    notFound: "",
     foundFilms: [],
     indexPageFilms: 1,
     showMoreFilm: false,
+    genresFilms: [],
+    genreFilmSelect: "",
+    whichFilmURL: "",
     foundTVseries: [],
     indexPageTVseries: 1,
     showMoreTVseries: false,
-    notFound: "",
-    genresFilms: [],
     genresTVseries: [],
+    genreTVserieSelect: "",
+    whichTVserieURL: "",
     methods: {
         downloadAPIgenres: function () {
             axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=99d73ffb466f6133b596f43c0724d28c")
@@ -22,14 +26,24 @@ export const store = reactive({
                     store.genresTVseries = response.data.genres;
                 });
         },
-        downloadAPIfilms: function (daSvuotare) {
+        downloadAPIfilms: function (daSvuotare, whichFilmURL) {
             if (daSvuotare == true) {
                 store.foundFilms = [];
                 store.indexPageFilms = 1;
             } else {
                 store.indexPageFilms++;
             }
-            let urlFilms = encodeURI("https://api.themoviedb.org/3/search/movie?api_key=99d73ffb466f6133b596f43c0724d28c&query=" + store.search + "&page=" + store.indexPageFilms);
+            let urlFilms;
+            if (whichFilmURL == "byName") {
+                store.whichFilmURL = "byName";
+                urlFilms = encodeURI("https://api.themoviedb.org/3/search/movie?api_key=99d73ffb466f6133b596f43c0724d28c&query=" + store.search + "&page=" + store.indexPageFilms);
+            } else if (whichFilmURL == "byGenre") {
+                store.whichFilmURL = "byGenre";
+                urlFilms = "https://api.themoviedb.org/3/discover/movie?api_key=99d73ffb466f6133b596f43c0724d28c&with_genres=" + store.genreFilmSelect + "&page=" + store.indexPageFilms;
+                store.foundTVseries = [];
+                store.showMoreTVseries = false;
+                store.genreTVserieSelect = "";
+            }
             axios.get(urlFilms)
                 .then(async response => {
                     for (let i = 0; i < response.data.results.length; i++) {
@@ -80,14 +94,24 @@ export const store = reactive({
                     }
                 })
         },
-        downloadAPITVseries: function (daSvuotare) {
+        downloadAPITVseries: function (daSvuotare, whichTVserieURL) {
             if (daSvuotare == true) {
                 store.foundTVseries = [];
                 store.indexPageTVseries = 1;
             } else {
                 store.indexPageTVseries++;
             }
-            let urlTVseries = encodeURI("https://api.themoviedb.org/3/search/tv?api_key=99d73ffb466f6133b596f43c0724d28c&query=" + store.search + "&page=" + store.indexPageTVseries);
+            let urlTVseries;
+            if (whichTVserieURL == "byName") {
+                store.whichTVserieURL = "byName";
+                urlTVseries = encodeURI("https://api.themoviedb.org/3/search/tv?api_key=99d73ffb466f6133b596f43c0724d28c&query=" + store.search + "&page=" + store.indexPageTVseries);
+            } else if (whichTVserieURL == "byGenre") {
+                store.whichTVserieURL = "byGenre";
+                urlTVseries = "https://api.themoviedb.org/3/discover/tv?api_key=99d73ffb466f6133b596f43c0724d28c&with_genres=" + store.genreTVserieSelect + "&page=" + store.indexPageTVseries;
+                store.foundFilms = [];
+                store.showMoreFilm = false;
+                store.genreFilmSelect = "";
+            }
             axios.get(urlTVseries)
                 .then(async response => {
                     for (let i = 0; i < response.data.results.length; i++) {
@@ -140,8 +164,8 @@ export const store = reactive({
         },
         downloadAPI: function () {
             store.notFound = "Spiacenti, nessun risultato corrispondente alla ricerca effettuata";
-            store.methods.downloadAPIfilms(true);
-            store.methods.downloadAPITVseries(true);
+            store.methods.downloadAPIfilms(true, "byName");
+            store.methods.downloadAPITVseries(true, "byName");
         }
     }
 })

@@ -20,9 +20,15 @@ export default {
 </template>
 
 <style scoped>
+nav {
+    width: 100%;
+    display: flex;
+}
+
 input {
     border-top-left-radius: 0.3rem;
     border-bottom-left-radius: 0.3rem;
+    width: 100%;
 }
 
 input:focus {

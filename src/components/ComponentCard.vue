@@ -28,9 +28,9 @@ export default {
             </div>
             <div class="marTop0_5rem">
                 <strong v-if="genresName.length != 0">Genere: </strong>
-                <span class="fonSiz0_9rem" v-for="(gener, i) in genresName">
-                    <span v-if="i < (genresName.length - 1)">{{ gener }}, </span>
-                    <span v-else>{{ gener }}.</span>
+                <span class="fonSiz0_9rem" v-for="(genre, i) in genresName">
+                    <span v-if="i < (genresName.length - 1)">{{ genre }}, </span>
+                    <span v-else>{{ genre }}.</span>
                 </span>
             </div>
             <div class="marTop0_5rem">

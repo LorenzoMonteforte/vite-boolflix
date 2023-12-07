@@ -1,17 +1,32 @@
 <script>
+import { store } from '../store';
 import ComponentNavbar from './ComponentNavbar.vue';
+import ComponentSelect from "./ComponentSelect.vue";
 export default {
     name: "ComponentHeader",
     components: {
-        ComponentNavbar
+        ComponentNavbar,
+        ComponentSelect
+    },
+    data() {
+        return {
+            store
+        }
     }
 }
 </script>
 
 <template>
     <header>
-        <h1>BOOLFLIX</h1>
-        <ComponentNavbar />
+        <div>
+            <h1>BOOLFLIX</h1>
+        </div>
+        <div>
+            <ComponentNavbar />
+        </div>
+        <div>
+            <ComponentSelect />
+        </div>
     </header>
 </template>
 
@@ -20,11 +35,33 @@ header {
     height: 100px;
     background-color: rgba(27, 27, 27, 255);
     display: flex;
-    align-items: center;
     padding: 0 1rem;
-    justify-content: space-between;
     position: fixed;
     width: 100%;
+}
+
+header>div:first-child,
+header>div:last-child {
+    height: 100%;
+    width: 25%;
+}
+
+header>div:nth-child(2) {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+header>div:first-child {
+    display: flex;
+    align-items: center;
+}
+
+header>div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 h1 {
