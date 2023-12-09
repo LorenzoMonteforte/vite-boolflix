@@ -12,14 +12,13 @@ export default {
 
 <template>
     <div>
-        <select class="inpBtn" v-model="store.genreFilmSelect" @change="store.methods.downloadAPIfilms(true, 'byGenre')">
+        <select class="inpBtn" v-model="store.genreSelected[0]" @change="store.methods.downloadAPI(0, true, 'byGenre')">
             <option value="">Ricerca film per genere</option>
-            <option v-for="genreFilm in store.genresFilms" :value="genreFilm.id">{{ genreFilm.name }}</option>
+            <option v-for="genreFilm in store.genres[0]" :value="genreFilm.id">{{ genreFilm.name }}</option>
         </select>
-        <select class="inpBtn" v-model="store.genreTVserieSelect"
-            @change="store.methods.downloadAPITVseries(true, 'byGenre')">
+        <select class="inpBtn" v-model="store.genreSelected[1]" @change="store.methods.downloadAPI(1, true, 'byGenre')">
             <option value="">Ricerca serie TV per genere</option>
-            <option v-for="genreTVserie in store.genresTVseries" :value="genreTVserie.id">{{ genreTVserie
+            <option v-for="genreTVserie in store.genres[1]" :value="genreTVserie.id">{{ genreTVserie
                 .name }}</option>
         </select>
     </div>
