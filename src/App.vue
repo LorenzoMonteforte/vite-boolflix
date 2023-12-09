@@ -13,6 +13,8 @@ export default {
         }
     },
     mounted() {
+        store.methods.downloadAPI(0, true, "byPopularity");
+        store.methods.downloadAPI(1, true, "byPopularity");
         store.methods.downloadAPIgenres();
     }
 }

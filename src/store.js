@@ -4,16 +4,13 @@ export const store = reactive({
     search: "",
     search2: "",
     notFound: "",
-
     api: ["movie", "tv"],
-
     genres: [[], []],
     found: [[], []],
     indexPage: [1, 1],
     whichFilter: ["", ""],
     genreSelected: ["", ""],
     showMore: [false, false],
-
     methods: {
         downloadAPIgenres: function () {
             let url;
@@ -34,9 +31,17 @@ export const store = reactive({
                 store.indexPage[i]++;
             }
             let url;
-            if (whichFilter == "byName") {
-                url = encodeURI("https://api.themoviedb.org/3/search/" + store.api[i] + "?api_key=99d73ffb466f6133b596f43c0724d28c&query=" + store.search2 + "&page=" + store.indexPage[i]);
-                store.whichFilter[i] = "byName";
+            if (whichFilter == "byPopularity") {
+                url = "https://api.themoviedb.org/3/" + store.api[i] + "/popular?api_key=99d73ffb466f6133b596f43c0724d28c" + "&page=" + store.indexPage[i];
+                store.whichFilter[i] = "byPopularity";
+            } else if (whichFilter == "byName") {
+                if (store.search2 != "") {
+                    url = encodeURI("https://api.themoviedb.org/3/search/" + store.api[i] + "?api_key=99d73ffb466f6133b596f43c0724d28c&query=" + store.search2 + "&page=" + store.indexPage[i]);
+                    store.whichFilter[i] = "byName";
+                } else {
+                    url = "https://api.themoviedb.org/3/" + store.api[i] + "/popular?api_key=99d73ffb466f6133b596f43c0724d28c" + "&page=" + store.indexPage[i];
+                    store.whichFilter[i] = "byPopularity";
+                }
             } else if (whichFilter == "byGenre") {
                 url = "https://api.themoviedb.org/3/discover/" + store.api[i] + "?api_key=99d73ffb466f6133b596f43c0724d28c&with_genres=" + store.genreSelected[i] + "&page=" + store.indexPage[i];
                 store.whichFilter[i] = "byGenre";
@@ -100,12 +105,10 @@ export const store = reactive({
                     } else if (!(store.indexPage[i] < store.found[i][0].total_pages)) {
                         store.showMore[i] = false;
                     }
+                    if (store.found[0].length == 0 && store.found[1].length == 0) {
+                        store.notFound = "Spiacenti, nessun risultato corrispondente alla ricerca effettuata";
+                    }
                 })
-        },
-        invokeDownloadAPI: function () {
-            store.notFound = "Spiacenti, nessun risultato corrispondente alla ricerca effettuata";
-            store.methods.downloadAPI(0, true, "byName");
-            store.methods.downloadAPI(1, true, "byName");
         }
     }
 })

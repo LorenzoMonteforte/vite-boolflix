@@ -12,8 +12,10 @@ export default {
 
 <template>
     <nav>
-        <input class="inpBtn" type="text" v-model="this.store.search" @keyup.enter="this.store.methods.invokeDownloadAPI()">
-        <button class="inpBtn" @click="this.store.methods.invokeDownloadAPI()">
+        <input class="inpBtn" type="text" v-model="this.store.search"
+            @keyup.enter="this.store.methods.downloadAPI(0, true, 'byName'), this.store.methods.downloadAPI(1, true, 'byName')">
+        <button class="inpBtn"
+            @click="this.store.methods.downloadAPI(0, true, 'byName'), this.store.methods.downloadAPI(1, true, 'byName')">
             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
         </button>
     </nav>
