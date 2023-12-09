@@ -18,7 +18,7 @@ export default {
     <main>
         <div id="notFoundMessage" v-if="store.found[0].length == 0 && store.found[1].length == 0">{{ store.notFound
         }}</div>
-        <h2 v-if="store.found[0].length != 0">FILM</h2>
+        <h2 v-if="store.found[0].length != 0">FILM {{ store.title }}</h2>
         <div class="cardContainer">
             <ComponentCard v-for="film in this.store.found[0]" :srcCopertina="film.srcCopertina" :title="film.title"
                 :original_title="film.original_title" :overview="film.overview" :numberStar="film.numberStar"
@@ -29,7 +29,8 @@ export default {
                 Mostra altri contenuti
             </button>
         </div>
-        <h2 :class="store.found[0].length != 0 ? 'marTop1_5rem' : ''" v-if="store.found[1].length != 0">SERIE TV</h2>
+        <h2 :class="store.found[0].length != 0 ? 'marTop1_5rem' : ''" v-if="store.found[1].length != 0">SERIE TV {{
+            store.title }}</h2>
         <div class="cardContainer">
             <ComponentCard v-for="TVserie in this.store.found[1]" :srcCopertina="TVserie.srcCopertina"
                 :title="TVserie.title" :original_title="TVserie.original_title" :overview="TVserie.overview"

@@ -4,6 +4,7 @@ export const store = reactive({
     search: "",
     search2: "",
     notFound: "",
+    title: "",
     api: ["movie", "tv"],
     genres: [[], []],
     found: [[], []],
@@ -34,17 +35,26 @@ export const store = reactive({
             if (whichFilter == "byPopularity") {
                 url = "https://api.themoviedb.org/3/" + store.api[i] + "/popular?api_key=99d73ffb466f6133b596f43c0724d28c" + "&page=" + store.indexPage[i];
                 store.whichFilter[i] = "byPopularity";
+                store.title = "PIÙ POPOLARI";
             } else if (whichFilter == "byName") {
                 if (store.search2 != "") {
                     url = encodeURI("https://api.themoviedb.org/3/search/" + store.api[i] + "?api_key=99d73ffb466f6133b596f43c0724d28c&query=" + store.search2 + "&page=" + store.indexPage[i]);
                     store.whichFilter[i] = "byName";
+                    store.title = "CORRISPONDENTI ALLA RICERCA \"" + store.search2.toUpperCase() + "\"";
                 } else {
                     url = "https://api.themoviedb.org/3/" + store.api[i] + "/popular?api_key=99d73ffb466f6133b596f43c0724d28c" + "&page=" + store.indexPage[i];
                     store.whichFilter[i] = "byPopularity";
+                    store.title = "PIÙ POPOLARI";
                 }
             } else if (whichFilter == "byGenre") {
                 url = "https://api.themoviedb.org/3/discover/" + store.api[i] + "?api_key=99d73ffb466f6133b596f43c0724d28c&with_genres=" + store.genreSelected[i] + "&page=" + store.indexPage[i];
                 store.whichFilter[i] = "byGenre";
+                for (let index = 0; index < store.genres[i].length; index++) {
+                    if (store.genreSelected[i] == store.genres[i][index].id) {
+                        store.title = store.genres[i][index].name.toUpperCase();
+                        break;
+                    }
+                }
                 let y;
                 if (i == 0 ? y = 2 : y = 1) {
                     store.found[(y - 1)] = [];
