@@ -52,4 +52,20 @@ option {
 select:hover {
     cursor: pointer;
 }
+
+@media only screen and (max-width: 992px) {
+    div {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    div {
+        justify-content: space-between;
+        gap: unset;
+    }
+}
 </style>

@@ -73,4 +73,45 @@ h1 {
 a {
     text-decoration: none;
 }
+
+@media only screen and (max-width: 992px) {
+    header {
+        flex-wrap: wrap;
+    }
+
+    header>div:first-child,
+    header>div:nth-child(2) {
+        height: 50%;
+        width: 50%;
+    }
+
+    header>div:nth-child(2) {
+        justify-content: flex-end;
+    }
+
+    header>div:last-child {
+        height: 50%;
+        width: 100%;
+        justify-content: normal;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    header {
+        height: 150px;
+    }
+
+    header>div {
+        height: calc(100% / 3) !important;
+        width: 100% !important;
+    }
+
+    header>div {
+        justify-content: center;
+    }
+
+    header>div:nth-child(2) {
+        justify-content: normal;
+    }
+}
 </style>

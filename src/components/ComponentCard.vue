@@ -118,4 +118,16 @@ export default {
 .fonWeiBol {
     font-weight: bold;
 }
+
+@media only screen and (max-width: 992px) {
+    .card {
+        width: calc((100% - 1.5rem) / 2);
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .card {
+        width: 100%;
+    }
+}
 </style>

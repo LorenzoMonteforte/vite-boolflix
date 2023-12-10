@@ -87,4 +87,17 @@ h2 {
 .btnContainer>button:hover {
     cursor: pointer;
 }
+
+@media only screen and (max-width: 992px) {
+    main {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    main {
+        padding-top: calc(1.5rem + 150px);
+    }
+}
 </style>

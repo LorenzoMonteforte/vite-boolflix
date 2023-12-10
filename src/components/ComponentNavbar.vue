@@ -53,4 +53,16 @@ button {
 button:hover {
     cursor: pointer;
 }
+
+@media only screen and (max-width: 992px) {
+    nav {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    nav {
+        width: 100%;
+    }
+}
 </style>
