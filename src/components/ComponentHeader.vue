@@ -19,7 +19,9 @@ export default {
 <template>
     <header>
         <div>
-            <h1>BOOLFLIX</h1>
+            <a href="../../index.html">
+                <h1>BOOLFLIX</h1>
+            </a>
         </div>
         <div>
             <ComponentNavbar />
@@ -66,5 +68,9 @@ header>div:last-child {
 
 h1 {
     color: red;
+}
+
+a {
+    text-decoration: none;
 }
 </style>

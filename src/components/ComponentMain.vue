@@ -83,4 +83,8 @@ h2 {
     color: white;
     background-color: rgba(27, 27, 27, 255);
 }
+
+.btnContainer>button:hover {
+    cursor: pointer;
+}
 </style>

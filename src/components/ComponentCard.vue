@@ -72,10 +72,11 @@ export default {
 
 <style scoped>
 .card {
-    aspect-ratio: 1;
-    width: calc((100% - 3rem) / 3);
+    aspect-ratio: 1 / 1.618;
+    width: calc((100% - 4.5rem) / 4);
     background-color: rgba(27, 27, 27, 255);
     color: white;
+    box-shadow: 1px 1px 3px 1px rgba(27, 27, 27, 255);
 }
 
 .card>img {

@@ -23,6 +23,12 @@ export const store = reactive({
                     })
             }
         },
+        filterByPopularity: function (i) {
+            let url = "https://api.themoviedb.org/3/" + store.api[i] + "/popular?api_key=99d73ffb466f6133b596f43c0724d28c" + "&page=" + store.indexPage[i];
+            store.whichFilter[i] = "byPopularity";
+            store.title = "PIÙ POPOLARI";
+            return url;
+        },
         downloadAPI: function (i, daSvuotare, whichFilter) {
             if (daSvuotare == true) {
                 store.found[i] = [];
@@ -36,36 +42,36 @@ export const store = reactive({
             }
             let url;
             if (whichFilter == "byPopularity") {
-                url = "https://api.themoviedb.org/3/" + store.api[i] + "/popular?api_key=99d73ffb466f6133b596f43c0724d28c" + "&page=" + store.indexPage[i];
-                store.whichFilter[i] = "byPopularity";
-                store.title = "PIÙ POPOLARI";
+                url = this.filterByPopularity(i);
             } else if (whichFilter == "byName") {
                 if (store.search2 != "") {
                     url = encodeURI("https://api.themoviedb.org/3/search/" + store.api[i] + "?api_key=99d73ffb466f6133b596f43c0724d28c&query=" + store.search2 + "&page=" + store.indexPage[i]);
                     store.whichFilter[i] = "byName";
                     store.title = "CORRISPONDENTI ALLA RICERCA \"" + store.search2.toUpperCase() + "\"";
                 } else {
-                    url = "https://api.themoviedb.org/3/" + store.api[i] + "/popular?api_key=99d73ffb466f6133b596f43c0724d28c" + "&page=" + store.indexPage[i];
-                    store.whichFilter[i] = "byPopularity";
-                    store.title = "PIÙ POPOLARI";
+                    url = this.filterByPopularity(i);
                 }
                 for (let index = 0; index < 2; index++) {
                     store.genreSelected[index] = "";
                 }
             } else if (whichFilter == "byGenre") {
-                url = "https://api.themoviedb.org/3/discover/" + store.api[i] + "?api_key=99d73ffb466f6133b596f43c0724d28c&with_genres=" + store.genreSelected[i] + "&page=" + store.indexPage[i];
-                store.whichFilter[i] = "byGenre";
-                for (let index = 0; index < store.genres[i].length; index++) {
-                    if (store.genreSelected[i] == store.genres[i][index].id) {
-                        store.title = store.genres[i][index].name.toUpperCase();
-                        break;
+                if (store.genreSelected[i] != "") {
+                    url = "https://api.themoviedb.org/3/discover/" + store.api[i] + "?api_key=99d73ffb466f6133b596f43c0724d28c&with_genres=" + store.genreSelected[i] + "&page=" + store.indexPage[i];
+                    store.whichFilter[i] = "byGenre";
+                    for (let index = 0; index < store.genres[i].length; index++) {
+                        if (store.genreSelected[i] == store.genres[i][index].id) {
+                            store.title = store.genres[i][index].name.toUpperCase();
+                            break;
+                        }
                     }
-                }
-                let y;
-                if (i == 0 ? y = 2 : y = 1) {
-                    store.found[(y - 1)] = [];
-                    store.showMore[(y - 1)] = false;
-                    store.genreSelected[(y - 1)] = "";
+                    let y;
+                    if (i == 0 ? y = 2 : y = 1) {
+                        store.found[(y - 1)] = [];
+                        store.showMore[(y - 1)] = false;
+                        store.genreSelected[(y - 1)] = "";
+                    }
+                } else {
+                    url = this.filterByPopularity(i);
                 }
             }
             axios.get(url)
