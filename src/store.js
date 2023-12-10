@@ -31,6 +31,9 @@ export const store = reactive({
             } else {
                 store.indexPage[i]++;
             }
+            if (i == 1 || (i == 0 && whichFilter == "byGenre")) {
+                store.search = "";
+            }
             let url;
             if (whichFilter == "byPopularity") {
                 url = "https://api.themoviedb.org/3/" + store.api[i] + "/popular?api_key=99d73ffb466f6133b596f43c0724d28c" + "&page=" + store.indexPage[i];
@@ -45,6 +48,9 @@ export const store = reactive({
                     url = "https://api.themoviedb.org/3/" + store.api[i] + "/popular?api_key=99d73ffb466f6133b596f43c0724d28c" + "&page=" + store.indexPage[i];
                     store.whichFilter[i] = "byPopularity";
                     store.title = "PIÙ POPOLARI";
+                }
+                for (let index = 0; index < 2; index++) {
+                    store.genreSelected[index] = "";
                 }
             } else if (whichFilter == "byGenre") {
                 url = "https://api.themoviedb.org/3/discover/" + store.api[i] + "?api_key=99d73ffb466f6133b596f43c0724d28c&with_genres=" + store.genreSelected[i] + "&page=" + store.indexPage[i];
